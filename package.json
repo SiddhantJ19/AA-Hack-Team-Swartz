@@ -4,7 +4,8 @@
   "description": "IVR service to support our Account Aggregator hackathon project in offline mode",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "keywords": [
     "node.js",
