@@ -5,14 +5,19 @@ const morgan = require('morgan');
 const path = require('path');
 
 const router = require('./src/router');
+const {handleError} = require('./src/error');
 
 const app = express();
 app.use(morgan('dev'));
 app.use(body_parser.json());
 app.use(body_parser.urlencoded({extended: false}));
 app.use(cookie_parser());
-// app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(router);
+
+// error middleware
+app.use((error, req, res, next) => {
+  res.send(handleError(error));
+});
 
 module.exports = app;
