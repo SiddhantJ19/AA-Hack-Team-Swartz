@@ -1,12 +1,12 @@
 const {ErrorHandler} = require('../../error');
 
-// call to server; must be async
+// TODO: call to server; must be async
 checkNumber = (num) => {
-    x = false;
+    x = true;
     if(x){
         return "Verified";
     }else{
-        throw new ErrorHandler(400, "This number is not registered with us. Sorry.")
+        throw new ErrorHandler(404, "This number is not registered with us. Sorry.")
     }
 }
 

@@ -1,5 +1,5 @@
 next --> 
-1. Design the flow for auth of number and pin
+1. Design the flow for auth of number and pin  --> This thing will be validated against the AA server 
 2. Chack out the api docs for gather, voiceResponse, TWIml
 
 2. options for get pending consents, review last consents, checkpoint number revoke consents

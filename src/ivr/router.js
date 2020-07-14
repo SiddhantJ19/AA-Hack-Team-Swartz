@@ -1,6 +1,7 @@
 const Router = require('express').Router;
-const {welcome, song} = require('./handler');
+const {welcome, song, menu} = require('./handler');
 const {isNumberRegistered} = require('./middlewares/isRegistered');
+const {authenticate} = require('./middlewares/auth');
 
 const router = new Router();
 
@@ -9,9 +10,14 @@ router.post('/welcome', isNumberRegistered, (req, res) => {
   return res.send(welcome());
 });
 
-router.post('/song', (req, res) => {
+router.post('/menu', authenticate ,(req, res) => {
+  return res.send(menu());
+});
+
+router.post('/song',(req, res) => {
   const digit = req.body.Digits;
   return res.send(song(digit));
 });
+
 
 module.exports = router;
