@@ -8,7 +8,7 @@ const mockControllerRegister = async (req, res) => {
     // console.log(await page.content()); // stringified snapshot of fom
 
     await page.waitForSelector('input[formcontrolname="aaId"]', {timeout : 0});
-    await page.type('input[formcontrolname="aaId"]', "dummyId@AA", {delay: 5});
+    await page.type('input[formcontrolname="aaId"]', "dumm3Id@AA", {delay: 5});
     await page.type('input[formcontrolname="mobile"]', "8433460645");
     await page.type('input[formcontrolname=password]', "1234");
     await page.type('input[formcontrolname=reEnterPassword]', "1234");
@@ -22,8 +22,10 @@ const mockControllerRegister = async (req, res) => {
 
     console.log('New Page URL:', page.url());
 
-    browser.close();
-    return res.status(200)
+
+    // process the next otp page before closing
+    // browser.close();
+    // return res.status(200)
 
 };
 
