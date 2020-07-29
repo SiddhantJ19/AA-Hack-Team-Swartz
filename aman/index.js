@@ -15,14 +15,18 @@ router.post('/login', function(req, res) {
 });
 
 router.post('/registerFromBank', function(req, res) {
-    registerFromBankController(req, res);
+  registerFromBankController(req, res);
 });
 
-router.post('/register', function (req, res) {
-    mockControllerRegister(req, res)
+router.post('/registerFromIVR', function(req, res) {
+  registerFromIVRController(req, res);
 });
-router.post('/aaLogin', function (req, res) {
-    mockControllerLogin(req, res)
+
+router.post('/register', function(req, res) {
+  mockControllerRegister(req, res)
+});
+router.post('/aaLogin', function(req, res) {
+  mockControllerLogin(req, res)
 });
 
 module.exports = router;

@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const CRED = {
   'user': 'admin',
   'pass': 'secure',
@@ -16,40 +17,39 @@ const registerFromBankController = async (req, res) => {
   if (!mobile) {
     return res.status(400).send('Please specify mobile number')
   }
-
-  const newUser = new userModel();
   try {
-    newUser.aaId = username;
+    const newUser = new userModel({aaId: username, phone: mobile, inBuffer: true});
+    await newUser.save();
   } catch (error) {
-    return res.send(400).send('User with given name already exists');
+    return res.status(400).send("username already exist or bad phone number");
   }
-
-  try {
-    newUser.phone = mobile;
-  } catch (error) {
-    return res.send(400).send('Invalid phone number');
-  }
-
-  await newUser.save();
-  res.send(200).send('User Registeration Started');
+  return res.status(200).send('User Registeration Started');
 }
 
-// check if not available in db, otherwise, send to db
-}
-;
-
+//TODO: test in db; test with ivr
 const registerFromIVRController = async (req, res) => {
   console.log('register from IVR controller');
 
   // get mobile from ivr
+  let phone = req.body.mobile;
+  let pin = req.body.pin;
 
   // get username and mobile from db and
+  let user = await userModel.findOne({phone: phone});
+
+  if(user === null){
+    return res.status(404).send("This user is does not exist. Reach out to your closest bank branch")
+  }
+  if(user.isRegistered){
+    return res.status(400).send("User with this number already exists");
+  }
+  user.isRegistered = true;
   // set pin in db
-  // Send the request to web ui
+  user.pin = pin;
+  user.inBuffer = false;
+  await user.save();
 
-  var pass = req.body['password'];
-  var confirmPass = req.body['confirmPassword'];
-
+  return res.send(200).send(`${user.aaId} is now registered`);
 
   // check if not available in db, otherwise, send to db
 };

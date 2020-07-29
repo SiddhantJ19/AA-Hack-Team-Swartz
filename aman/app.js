@@ -3,8 +3,8 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var router = require('./index.js');
 var mongoose = require('mongoose');
-const MONGO_URI =
-    'mongodb+srv://siddhant-user-1:%40siddhant-user-1@cluster0.3lkhs.mongodb.net/AA-hack?retryWrites=true&w=majority'
+const MONGO_URI = "mongodb://localhost:27017/AA-hack"
+    // 'mongodb+srv://siddhant-user-1:%40siddhant-user-1@cluster0.3lkhs.mongodb.net/AA-hack?retryWrites=true&w=majority'
 const app = express();
 
 const PORT = 5431;

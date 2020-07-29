@@ -5,12 +5,7 @@ const userSchema = new mongoose.Schema({
   phone: {
     type: Number,
     required: true,
-    validate: {
-      validator: function(v) {
-        return /\d{10}/.test(v)
-      },
-      message: props => `${props.value} is not a valid number`
-    }
+    unique: true,
   },
   inBuffer: {type: Boolean, default: false}, // true after first phase of registeration
   isRegistered: {type: Boolean, default: false}, // true after otp validation
