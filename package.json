@@ -19,7 +19,11 @@
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.5",
     "express": "^4.17.1",
+    "mongoose": "^5.9.26",
     "morgan": "^1.10.0",
-    "twilio": "^3.48.0"
+    "twilio": "^3.48.0",
+    "nodemon": "^2.0.4",
+    "puppeteer": "^5.2.1",
+    "request": "^2.88.2"
   }
 }

@@ -26,33 +26,6 @@ const registerFromBankController = async (req, res) => {
   return res.status(200).send('User Registeration Started');
 }
 
-//TODO: test in db; test with ivr
-const registerFromIVRController = async (req, res) => {
-  console.log('register from IVR controller');
-
-  // get mobile from ivr
-  let phone = req.body.mobile;
-  let pin = req.body.pin;
-
-  // get username and mobile from db and
-  let user = await userModel.findOne({phone: phone});
-
-  if(user === null){
-    return res.status(404).send("This user is does not exist. Reach out to your closest bank branch")
-  }
-  if(user.isRegistered){
-    return res.status(400).send("User with this number already exists");
-  }
-  user.isRegistered = true;
-  // set pin in db
-  user.pin = pin;
-  user.inBuffer = false;
-  await user.save();
-
-  return res.send(200).send(`${user.aaId} is now registered`);
-
-  // check if not available in db, otherwise, send to db
-};
 
 const loginController = async (req, res) => {
   var userId = req.body['userId'];      // swartzaman
@@ -79,6 +52,5 @@ const loginController = async (req, res) => {
 
 module.exports = {
   registerFromBankController,
-  registerFromIVRController,
   loginController
 };

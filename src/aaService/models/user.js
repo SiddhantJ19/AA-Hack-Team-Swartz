@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const userSchema = new mongoose.Schema({
   aaId: {type: String, required: true, unique: true},
   phone: {
-    type: Number,
+    type: String,
     required: true,
     unique: true,
   },

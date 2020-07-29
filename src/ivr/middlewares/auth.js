@@ -1,20 +1,23 @@
 const {ErrorHandler} = require('../../error');
+const {userModel} = require('../../aaService/models/user');
 
-const authPin = (pin) => {
-    x = false;
-    if(x){
-        return true;
-    }else{
-        throw new ErrorHandler(403, "This is an incorrect pin. Please try again later")
-    }
-}
+const authPin = async (pin, phone) => {
+  const user = await userModel.findOne({phone: phone});
+  console.log(pin, user.pin);
+  if (user.pin != pin) {
+    throw new ErrorHandler(
+        403, 'This is an incorrect pin. Please try again later')
+  };
+  return user;
+};
 
-exports.authenticate = (req, res, next) => {
+exports.authenticate = async (req, res, next) => {
   const pin = req.body.Digits;
+  const phone = req.body.From;
   try {
-      authPin(pin);
-      next();
+    req.user = await authPin(pin, phone);
+    next();
   } catch (error) {
-      next(error);
+    next(error);
   }
 }
