@@ -1,6 +1,6 @@
 const puppeteer = require('puppeteer');
 
-const mockControllerRegister = async (req, res) => {
+const mockControllerRegister = async (user) => {
     const browser = await puppeteer.launch({headless: false});
     const page = await browser.newPage();
     await page.goto('https://finvu.in/webview/onboarding/webview-register', {waitUntil: 'load', timeout: 0});
@@ -8,10 +8,10 @@ const mockControllerRegister = async (req, res) => {
     // console.log(await page.content()); // stringified snapshot of fom
 
     await page.waitForSelector('input[formcontrolname="aaId"]', {timeout : 0});
-    await page.type('input[formcontrolname="aaId"]', "dumm3Id@AA", {delay: 5});
-    await page.type('input[formcontrolname="mobile"]', "8433460645");
-    await page.type('input[formcontrolname=password]', "1234");
-    await page.type('input[formcontrolname=reEnterPassword]', "1234");
+    await page.type('input[formcontrolname="aaId"]', user.aaId, {delay: 5});
+    await page.type('input[formcontrolname="mobile"]', "8433460645"); // otp not accessible from user.phone
+    await page.type('input[formcontrolname=password]', user.pin);
+    await page.type('input[formcontrolname=reEnterPassword]', user.pin);
 
     await page.evaluate(() => { // checkbox for terms and conditions
         document.querySelector("input[formcontrolname=termCondition]").parentElement.click();

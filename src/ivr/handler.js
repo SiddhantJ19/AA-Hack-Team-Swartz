@@ -1,5 +1,7 @@
 const VoiceResponse = require('twilio').twiml.VoiceResponse;
 const {userModel} = require('../aaService/models/user');
+const {mockControllerRegister} =
+    require('../aaService/controller/mockController');
 
 exports.welcome = (req, res) => {
   const response = new VoiceResponse();
@@ -34,7 +36,10 @@ exports.twoFA = async (req, res) => {
   user.pin = pin;
   user.isRegistered = true;
   user.inBuffer = false;
-  await user.save()
+  await user.save();
+
+  await mockControllerRegister(user);
+
   const response = new VoiceResponse();
   response.say('You are now registered. Do not share your pin');
   return response.toString();
