@@ -51,7 +51,19 @@ import "firebase/auth";
     },
 
     onSubmit(){
-
+      const data = {
+        username: this.form.arn,
+        mobile:  this.form.phoneNo
+      };
+      console.log(data)
+      fetch('http://localhost:3000/api/registerFromBank', {
+        headers: {
+          "Content-Type": "application/json"
+        },
+        method: "POST",
+        body : JSON.stringify({...data})
+      })
+      .then(res => console.log(res)) 
     }
     }
   }
