@@ -3,3 +3,9 @@ next -->
 2. Chack out the api docs for gather, voiceResponse, TWIml
 
 2. options for get pending consents, review last consents, checkpoint number revoke consents
+
+
+1. confirm user in database (registeration and login apis)
+2. 1 for linking accounts (dummy list of connected accounts) echo (dummy list of connected accounts apis) 
+3. 2 for pending consents (dummy consents) echo (dummy pending apis)
+4. 3 for revoke consents (dummy consents) echo (dummy previous consents apis)

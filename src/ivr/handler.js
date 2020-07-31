@@ -38,7 +38,7 @@ exports.twoFA = async (req, res) => {
   user.inBuffer = false;
   await user.save();
 
-  await mockControllerRegister(user);
+  // await mockControllerRegister(user);
 
   const response = new VoiceResponse();
   response.say('You are now registered. Do not share your pin');
@@ -48,7 +48,7 @@ exports.twoFA = async (req, res) => {
 exports.menu = () => {
   const response = new VoiceResponse();
   const gather = response.gather({
-    action: '/ivr/song',
+    action: '/ivr/demos',
     numDigits: '1',
     method: 'POST',
   });
@@ -61,10 +61,48 @@ exports.menu = () => {
   return response.toString();
 };
 
-exports.song = (digit) => {
-  if (digit) {
-    const response = new VoiceResponse();
-    response.say('You pressed' + digit.toString());
-    return response.toString();
-  };
+exports.checkPointHandler = () => {
+  const response = new VoiceResponse();
+  response.say('You pressed checkpoint');
+  return response.toString();
+}
+
+exports.pendingConsentHandler = () => {
+  const response = new VoiceResponse();
+  const gather =  response.gather({
+    action: '/ivr/computePending/12', // id of the pending Consent
+    numDigits: '1',
+    method: 'POST',
+  });
+  gather.say('HDFC bank wants to access your last 25 SBI bank transactions. Press 1 to approve or 2 to deny') // hardcoded dummy pending request
+  return response.toString();
+}
+
+exports.computePendingHandler = (digit) => {
+  const response = new VoiceResponse();
+  if(digit == 1){
+    response.say('Consent approved');
+  }
+  else{
+    response.say('Consent Denied');
+  }
+  return response.toString();
+}
+
+exports.previousConsentHandler = () => {
+  const response = new VoiceResponse();
+  response.say('You pressed pre');
+  return response.toString();
+}
+
+exports.revokeConsentHandler = () => {
+  const response = new VoiceResponse();
+  response.say('You pressed revoke');
+  return response.toString();
+}
+
+exports.unrecognizedDigitHandler = () => {
+  const response = new VoiceResponse();
+  response.say('Invalid Choice; Try again later');
+  return response.toString();
 }
