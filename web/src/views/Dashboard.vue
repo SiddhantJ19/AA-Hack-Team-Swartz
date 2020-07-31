@@ -9,7 +9,7 @@
       </el-menu-item>
       <el-menu-item index="2" @click="signOut">
         <i class="el-icon-switch-button"></i>
-        <span slot="title">Logout</span>
+        <span slot="title">{{$t('logout')}}</span>
       </el-menu-item>
     </el-menu>
   </div>
@@ -20,19 +20,19 @@
     </el-header>
     <el-main>
       <el-table :data="tableData">
-        <el-table-column prop="arn" label="ARN">
+        <el-table-column prop="arn" :label="ARN">
           <template slot-scope="scope">
             <el-input v-model="scope.row.arn" :disabled="scope.row.status == 1"></el-input>
           </template>
         </el-table-column>
-        <el-table-column prop="phoneNo" label="Phone Number">
+        <el-table-column prop="phoneNo" :label="$t('phoneNo')">
           <template slot-scope="scope">
             <el-input v-model="scope.row.phoneNo" :disabled="scope.row.status == 1"></el-input>
           </template>
         </el-table-column>
-        <el-table-column label="Status" align="center">
+        <el-table-column :label="$t('statusText')" align="center">
           <template slot-scope="scope">
-            <el-badge v-if="scope.row.status == 1" type="primary" class="item" value="Applied"></el-badge>
+            <el-badge v-if="scope.row.status == 1" type="primary" class="item" :value="$t('status')"></el-badge>
             <el-button v-else type="success" round @click="onSubmit(scope.$index)">{{$t('btnText')}}</el-button>
           </template>
         </el-table-column>
