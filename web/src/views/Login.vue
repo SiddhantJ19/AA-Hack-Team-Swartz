@@ -7,9 +7,9 @@
                     <h1 class="image-caption">{{$t('welcomeMsg')}}</h1>
                     <p class="image-sub-caption">{{$t('subHeading')}}</p>
                     <ul class="feature-list">
-                        <li>Click <a href="#">here</a> to know more about AA</li>
-                        <li>Click <a href="#">here</a> to know about RBIT specs</li>
-                        <li>Click here</li>
+                        <li> </li>
+                        <li> </li>
+                        <li> </li>
                     </ul>
                 </div>
             </el-col>
@@ -23,7 +23,7 @@
                 ref="form" 
                 :model="form" 
                 label-width="120px">
-                  <h1>Login</h1>
+                  <h1>{{$t('login')}}</h1>
                   <!-- Email -->
                   <el-input
                           name="email"
@@ -48,11 +48,11 @@
                               class="button"
                               type="primary"
                               native-type="submit"
-                              round>Login <i class="el-icon-arrow-right"></i>
+                              round>{{$t('login')}} <i class="el-icon-arrow-right"></i>
                       </el-button>
                   </el-row>
 
-                  <p style="padding-top:2rem; cursor: pointer" @click="goToRegister">Doesn't have an account. Click here to register</p>
+                  <p style="padding-top:2rem; cursor: pointer" @click="goToRegister">{{$t('registerText')}}</p>
               </el-form>
 
               <!-- Register -->
@@ -178,6 +178,7 @@ export default {
     }
     .desc {
         background-color: #e6f1ff;
+        min-height: 110%;
     }
     .registration-error-message {
         color: #f56c6c;
