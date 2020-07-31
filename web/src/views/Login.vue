@@ -29,7 +29,7 @@
                           name="email"
                           prefix-icon="el-icon-message"
                           class="form-input"
-                          placeholder="Email"
+                          :placeholder="$t('login')"
                           type="email"
                           v-model="form.email"/>
 
@@ -38,7 +38,7 @@
                           name="password"
                           prefix-icon="el-icon-lock"
                           class="form-input"
-                          placeholder="Password"
+                          :placeholder="$t('password')"
                           type="password"
                           v-model="form.password"/>
 
