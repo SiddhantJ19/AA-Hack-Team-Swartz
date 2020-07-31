@@ -5,7 +5,7 @@
     <el-menu style="min-height:100%" mode="vertical" default-active="1" :collapse="true">
       <el-menu-item index="1">
         <i class="el-icon-money"></i>
-        <span slot="title">Consent</span>
+        <span slot="title">{{$t('dashboardHeader')}}</span>
       </el-menu-item>
       <el-menu-item index="2" @click="signOut">
         <i class="el-icon-switch-button"></i>
@@ -16,7 +16,7 @@
 
   <el-container>
     <el-header>
-      <span style="margin: 1rem 1rem">Consent Applicant List</span>
+      <span style="margin: 1rem 1rem">{{$t('dashboardHeader')}}</span>
     </el-header>
     <el-main>
       <el-table :data="tableData">
@@ -33,11 +33,11 @@
         <el-table-column label="Status" align="center">
           <template slot-scope="scope">
             <el-badge v-if="scope.row.status == 1" type="primary" class="item" value="Applied"></el-badge>
-            <el-button v-else type="success" round @click="onSubmit(scope.$index)">Create</el-button>
+            <el-button v-else type="success" round @click="onSubmit(scope.$index)">{{$t('btnText')}}</el-button>
           </template>
         </el-table-column>
     </el-table>
-    <el-button style="margin:2rem auto; display:block;" type="primary" icon="el-icon-plus" round @click="addRow">Add Applicant</el-button>
+    <el-button style="margin:2rem auto; display:block;" type="primary" icon="el-icon-plus" round @click="addRow">{{$t('createApplicantBtn')}}</el-button>
     </el-main>
   </el-container>
 </el-container>
