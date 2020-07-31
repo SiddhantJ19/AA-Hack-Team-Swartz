@@ -1,43 +1,80 @@
 <template>
-<div>
 
-<el-menu default-active="1" class="el-menu-vertical-demo" :collapse="true">
-  <el-menu-item index="1">
-    <i class="el-icon-money"></i>
-    <span slot="title">Consent</span>
-  </el-menu-item>
-  <el-menu-item index="2" @click="signOut">
-    <i class="el-icon-switch-button"></i>
-    <span slot="title">Logout</span>
-  </el-menu-item>
-</el-menu>
-<el-form :inline="true" ref="form" :model="form" label-width="120px">
-  <el-form-item label="ARN Number">
-    <el-input v-model="form.arn"></el-input>
-  </el-form-item>
-  <el-form-item label="Phone Number">
-    <el-input v-model="form.phoneNo"></el-input>
-  </el-form-item>
-  <el-form-item>
-    <el-button type="primary" @click="onSubmit">Create</el-button>
-  </el-form-item>
-</el-form>
-</div>
+<el-container>
+  <div>
+    <el-menu style="min-height:100%" mode="vertical" default-active="1" :collapse="true">
+      <el-menu-item index="1">
+        <i class="el-icon-money"></i>
+        <span slot="title">Consent</span>
+      </el-menu-item>
+      <el-menu-item index="2" @click="signOut">
+        <i class="el-icon-switch-button"></i>
+        <span slot="title">Logout</span>
+      </el-menu-item>
+    </el-menu>
+  </div>
+
+  <el-container>
+    <el-header>
+      <span style="margin: 1rem 1rem">Consent Applicant List</span>
+    </el-header>
+    <el-main>
+      <el-table :data="tableData">
+        <el-table-column prop="arn" label="ARN">
+          <template slot-scope="scope">
+            <el-input v-model="scope.row.arn" :disabled="scope.row.status == 1"></el-input>
+          </template>
+        </el-table-column>
+        <el-table-column prop="phoneNo" label="Phone Number">
+          <template slot-scope="scope">
+            <el-input v-model="scope.row.phoneNo" :disabled="scope.row.status == 1"></el-input>
+          </template>
+        </el-table-column>
+        <el-table-column label="Status" align="center">
+          <template slot-scope="scope">
+            <el-badge v-if="scope.row.status == 1" type="primary" class="item" value="Applied"></el-badge>
+            <el-button v-else type="success" round @click="onSubmit(scope.$index)">Create</el-button>
+          </template>
+        </el-table-column>
+    </el-table>
+    <el-button style="margin:2rem auto; display:block;" type="primary" icon="el-icon-plus" round @click="addRow">Add Applicant</el-button>
+    </el-main>
+  </el-container>
+</el-container>
+
 </template>
 <style>
-  
+  .el-header{
+    display:flex;
+    justify-content: center;
+    background-color: #00f;
+    color: #fff;
+    font-weight: bold;
+  }
 </style>
-
 <script>
 import * as firebase from "firebase/app";
 import "firebase/auth";
   export default {
     data() {
         return {
-          form:{
-            arn:'',
-            phoneNo: ''
-          }
+          tableData: [{
+            arn: 'XXXX-03',
+            phoneNo: 'XXXX4',
+            status: 1,
+          }, {
+            arn: 'XXXX-02',
+            phoneNo: 'XXXX4',
+            status: 1,
+          }, {
+            arn: 'XXXX-04',
+            phoneNo: 'XXXX4',
+            status: 1,
+          }, {
+            arn: 'XXXX-01',
+            phoneNo: 'XXXX4',
+            status: 0,
+          }],
         }
       },
     methods: {
@@ -50,21 +87,14 @@ import "firebase/auth";
         });
     },
 
-    onSubmit(){
-      const data = {
-        username: this.form.arn,
-        mobile:  this.form.phoneNo
-      };
-      console.log(data)
-      fetch('http://localhost:3000/api/registerFromBank', {
-        headers: {
-          "Content-Type": "application/json"
-        },
-        method: "POST",
-        body : JSON.stringify({...data})
-      })
-      .then(res => console.log(res)) 
-    }
+      onSubmit(index){
+        const applicant = this.tableData[index]
+        applicant.status = 1
+      },
+
+      addRow(){
+        this.tableData.push({arn: '', phoneNo: '', status: 0})
+      }
     }
   }
 </script>
