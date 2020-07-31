@@ -59,20 +59,20 @@ import "firebase/auth";
     data() {
         return {
           tableData: [{
-            arn: 'XXXX-03',
-            phoneNo: 'XXXX4',
+            arn: '84672674191@finvu',
+            phoneNo: '84672674191',
             status: 1,
           }, {
-            arn: 'XXXX-02',
-            phoneNo: 'XXXX4',
+            arn: '7840839201@onemoney',
+            phoneNo: '7840839201',
             status: 1,
           }, {
-            arn: 'XXXX-04',
-            phoneNo: 'XXXX4',
+            arn: '8929010929@finvu',
+            phoneNo: '8929010929',
             status: 1,
           }, {
-            arn: 'XXXX-01',
-            phoneNo: 'XXXX4',
+            arn: '',
+            phoneNo: '',
             status: 0,
           }],
         }
@@ -87,10 +87,21 @@ import "firebase/auth";
         });
     },
 
-      onSubmit(index){
-        const applicant = this.tableData[index]
-        applicant.status = 1
-      },
+      onSubmit(){
+      const data = {
+        username: this.tableData[3].arn,
+        mobile:  this.tableData[3].phoneNo
+      };
+      console.log(data)
+      fetch('http://localhost:3000/api/registerFromBank', {
+        headers: {
+          "Content-Type": "application/json"
+        },
+        method: "POST",
+        body : JSON.stringify({...data})
+      })
+      .then(res => console.log(res)) 
+    },
 
       addRow(){
         this.tableData.push({arn: '', phoneNo: '', status: 0})
