@@ -62,7 +62,7 @@
                 ref="form" 
                 :model="form" 
                 label-width="120px">
-                  <h1>Register</h1>
+                  <h1>{{$t('register')}}</h1>
                   <!-- Email -->
                   <el-input
                           name="email"
@@ -86,10 +86,10 @@
                           class="button"
                           type="primary"
                           native-type="submit"
-                          round>Register <i class="el-icon-arrow-right"></i>
+                          round>{{$t('register')}} <i class="el-icon-arrow-right"></i>
                   </el-button>
 
-                  <p style="padding-top:2rem; cursor: pointer" @click="goToLogin">Already have an account. Click here to login</p>
+                  <p style="padding-top:2rem; cursor: pointer" @click="goToLogin">{{$t('loginText')}}</p>
               </el-form>
             </el-col>
         </el-row>
